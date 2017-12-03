@@ -1,0 +1,74 @@
+<!--
+  Generated template for the InfogeneralPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>infogeneral</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="list">
+    
+      <div class="item item-input item-select">
+        <div class="input-label">
+          Categorie d'objet *
+        </div>
+        <select [(ngModel)]="categorie" style="width:150px" name="categorie" id="categorie" >
+          <optgroup label="Movilier-Deco" >
+            <option value="1">Gros mobilier</option>
+            <option selected="" value="2">Petit mobilier</option>
+            <option>Canape, Fauteuils et chaises</option>
+            <option>Tables et bureaux</option>
+            <option>Linge de maison</option>
+            <option>Objets deco et vaisselle</option>
+            <option>Mobilier professionnel</option>
+          </optgroup>
+          <optgroup label="Mode">
+            <option value='Vetement-femme'>Vetement femme</option>
+            <option value='Vetement-homme'>Vetement homme</option>
+          </optgroup>
+        </select>
+      </div>
+    
+      <div class="item item-input item-select">
+        <div class="input-label">
+          Fournisseur*
+        </div>
+        <select style="width:150px">
+          <option selected="">Fournisseur</option>
+        </select>
+      </div>
+      <br/>
+
+    </div>
+    
+    <div class="content has-header">
+        <p>Nom d'objet*</p>
+        <div class="list">
+          <label class="item item-input">
+            <input type="text" placeholder="" [(ngModel)]="Nom">
+          </label>
+        </div>
+      </div>
+
+
+      
+
+      
+      <br/><br/><br/>
+    
+      
+
+      <button ion-button (click)="change(categorie,Nom)">suivant</button>
+      <br/>
+      <br/>
+      <button ion-button style="height:20px">Prendre une photo</button>
+      <button ion-button style="height:20px">Importer une photo</button>
+</ion-content>

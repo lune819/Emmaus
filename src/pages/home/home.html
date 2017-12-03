@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  The world is your oyster.
+  <p>
+    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
+  </p>
+
+<button ion-button (click)="initDatabase()">initialiser</button>
+
+<div class="list">
+  <label class="item item-input">
+    <input type="text" placeholder="Identifiant" [(ngModel)]="login">
+  </label>
+  <br/>
+  <br/>
+  <label class="item item-input">
+    <input type="text" placeholder="Mot de passe" [(ngModel)]="mdp">
+  </label>
+</div>
+
+
+<button ion-button (click)="goChoix(login,mdp)">Submit</button>
+
+<p>results:
+  {{result}}
+</p>
+</ion-content>

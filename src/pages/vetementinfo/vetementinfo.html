@@ -1,0 +1,117 @@
+<!--
+  Generated template for the VetementinfoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>vetementinfo</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="item item-input item-select">
+    <div class="input-label">
+      Genre de vetement
+    </div>
+    <select [(ngModel)]="vetement_genre" style="width:150px" name="vetement_genre" id="vetement_genre" >
+      <optgroup label="Genre" >
+        <option selected="" value="Homme">Homme</option>
+        <option value="Femme">Femme</option>
+        <option value="Garcon">Garcon</option>
+        <option value="Fille">Fille</option>
+      </optgroup>
+    </select>
+  </div>
+  <div class="content has-header">
+      <p >Matiere*</p>
+      <div class="list">
+        <label class="item item-input">
+          <input type="text" placeholder="" [(ngModel)]="Matiere_Vetement">
+        </label>
+      </div>
+    </div>
+    <div class="content has-header">
+        <p>Marque</p>
+        <div class="list">
+          <label class="item item-input">
+            <input type="text" placeholder="" [(ngModel)]="Marque_Vetement">
+          </label>
+        </div>
+      </div>
+      {{Marque_Vetement}}
+      <div class="content has-header">
+          <p>Couleur*</p>
+          <div class="list">
+            <label class="item item-input">
+              <input type="text" placeholder="" [(ngModel)]="Couleur_Vetement">
+            </label>
+          </div>
+        </div>
+        <div class="content has-header">
+            <p>Poid (Kg) *</p>
+            <div class="list">
+              <label class="item item-input">
+                <input type="text" placeholder="" [(ngModel)]="Poid_Vetement">
+              </label>
+            </div>
+          </div>
+          <div class="content has-header">
+              <p>Description</p>
+              <div class="list">
+                <label class="item item-input">
+                    <textarea rows="3" cols="20" placeholder="Description jusqu'a 2000 caractere" [(ngModel)]="vetement_Description"> </textarea>
+                </label>
+              </div>
+            </div>
+            <div class="item item-input item-select">
+                <div class="input-label">
+                  Etat
+                </div>
+                <select [(ngModel)]="vetement_Etat" style="width:150px" name="vetement_etat" id="vetement_etat" >
+                  <optgroup label="Etat" >
+                    <option value="Bien">Bien</option>
+                    <option value="Moyen">Moyen</option>
+                    <option value="Mal">Mal</option>
+                  </optgroup>
+                </select>
+              </div> 
+
+
+              <div class="list">
+                
+                <div class="item item-divider"> 
+                  VINTAGE
+                </div>
+                
+                <label class="toggle toggle-assertive">
+                  <input type="checkbox" [(ngModel)]="vetement_vintage">
+                  <div class="track">
+                    <div class="handle"></div>
+                  </div>
+                  
+                </label>
+                </div>
+               
+                <div class="content has-header">
+                  <p >Prix*</p>
+                  <div class="list">
+                    <label class="item item-input">
+                      <input type="text" placeholder="" [(ngModel)]="vetement_prix">
+                    </label>
+                  </div>
+                  
+                </div>
+                Nombre :
+                <button ion-button (click)="decrease()">-</button>
+                {{number}}
+                <button ion-button (click)="increase()">+</button>
+                <br/>
+                <br/>
+                <br/>
+                <button ion-button (click)="suivant(vetement_genre,Matiere_Vetement,Marque_Vetement,Couleur_Vetement,Poid_Vetement,vetement_Description,vetement_Etat,vetement_vintage,vetement_prix)">Suivant</button>
+</ion-content>
