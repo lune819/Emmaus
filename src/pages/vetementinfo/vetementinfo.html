@@ -6,8 +6,8 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>vetementinfo</ion-title>
+  <ion-navbar class="color">
+    <ion-title class="color">vetementinfo</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -107,11 +107,11 @@
                   
                 </div>
                 Nombre :
-                <button ion-button (click)="decrease()">-</button>
+                <button ion-button color="light" (click)="decrease()">-</button>
                 {{number}}
-                <button ion-button (click)="increase()">+</button>
+                <button ion-button color="light" (click)="increase()">+</button>
                 <br/>
-                <br/>
-                <br/>
-                <button ion-button (click)="suivant(vetement_genre,Matiere_Vetement,Marque_Vetement,Couleur_Vetement,Poid_Vetement,vetement_Description,vetement_Etat,vetement_vintage,vetement_prix)">Suivant</button>
+                
+          
+                <button ion-button color="light" (click)="suivant(vetement_genre,Matiere_Vetement,Marque_Vetement,Couleur_Vetement,Poid_Vetement,vetement_Description,vetement_Etat,vetement_vintage,vetement_prix)">Suivant</button>
 </ion-content>

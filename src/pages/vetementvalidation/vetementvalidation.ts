@@ -31,6 +31,12 @@ export class VetementvalidationPage {
   public Description;
   public Poid;
   public result;
+  public avatar1;
+  public avatar2;
+  public avatar3;
+  public avatar4;
+  public avatar5;
+  public avatar6;
   private toast: Toast
   
     myAppDatabase: SQLiteObject;
@@ -47,12 +53,21 @@ export class VetementvalidationPage {
     this.Vintage = this.navParams.get('Vintage');
     this.Description = this.navParams.get('Description');
     this.Poid = this.navParams.get('Poid');
+
+    this.avatar1 = this.navParams.get('Image1');
+    this.avatar2 = this.navParams.get('Image2');
+    this.avatar3 = this.navParams.get('Image3');
+    this.avatar4 = this.navParams.get('Image4');
+    this.avatar5 = this.navParams.get('Image5');
+    this.avatar6 = this.navParams.get('Image6');
+
     this.sqlite.create({
       name: 'EmmausTest.db',
       location: 'default'
     }).then((database: SQLiteObject) => {
-      database.executeSql('CREATE TABLE IF NOT EXISTS users(email VARCHAR(320) PRIMARY KEY, username VARCHAR(20) NOT NULL, password VARCHAR(30) NOT NULL, gender BOOLEAN, age TINYINT, intro VARCHAR(300), phone CHAR(11), location VARCHAR(100));', {}).then(() => console.log('init database successfully')).catch(e => console.log(e));
-      database.executeSql('CREATE TABLE IF NOT EXISTS objets(nom VARCHAR(320) PRIMARY KEY, categorie VARCHAR(20) NOT NULL, couleur VARCHAR(30) NOT NULL, genre varchar(30) NOT NULL, marque varchar(30) NOT NULL, matiere VARCHAR(300) NOT NULL, etat VARCHAR(30) NOT NULL, prix VARCHAR(30) NOT NULL, quantite INTEGER, vintage BOOLEAN, poid varchar(30) NOT NULL, description VARCHAR(1000));', {}).then(() => console.log('init database successfully')).catch(e => console.log(e));      
+      //database.executeSql('CREATE TABLE IF NOT EXISTS users(email VARCHAR(320) PRIMARY KEY, username VARCHAR(20) NOT NULL, password VARCHAR(30) NOT NULL, gender BOOLEAN, age TINYINT, intro VARCHAR(300), phone CHAR(11), location VARCHAR(100));', {}).then(() => console.log('init database successfully')).catch(e => console.log(e));
+      //database.executeSql('CREATE TABLE IF NOT EXISTS objets(nom VARCHAR(320) PRIMARY KEY, categorie VARCHAR(20) NOT NULL, couleur VARCHAR(30) NOT NULL, genre varchar(30) NOT NULL, marque varchar(30) NOT NULL, matiere VARCHAR(300) NOT NULL, etat VARCHAR(30) NOT NULL, prix VARCHAR(30) NOT NULL, quantite INTEGER, vintage BOOLEAN, poid varchar(30) NOT NULL, description VARCHAR(1000)photo1 VARCHAR(255), photo2 VARCHAR(255), photo3 VARCHAR(255),photo4 VARCHAR(255), photo5 VARCHAR(255), photo6 VARCHAR(255));', {}).then(() => console.log('init database successfully')).catch(e => console.log(e));      
+      //database.executeSql('CREATE TABLE IF NOT EXISTS produits(nom VARCHAR(320) PRIMARY KEY, categorie VARCHAR(20) NOT NULL, couleur VARCHAR(30) NOT NULL, genre varchar(30) NOT NULL, marque varchar(30) NOT NULL, matiere VARCHAR(300) NOT NULL, etat VARCHAR(30) NOT NULL, prix VARCHAR(30) NOT NULL, quantite INTEGER, vintage BOOLEAN, description VARCHAR(1000),  );', {}).then(() => console.log('init database successfully')).catch(e => console.log(e));      
       this.myAppDatabase = database;
       
     })
@@ -62,12 +77,12 @@ export class VetementvalidationPage {
     console.log('ionViewDidLoad ValidationVetementPage');
   }
   valider(){
-    this.myAppDatabase.executeSql('INSERT INTO objets VALUES (?, ?, ?,?, ?, ?, ?, ?, ?,?,?,?);', [this.NomObjet, this.Categorie, this.Couleur,this.Genre,this.Marque,this.Matiere,this.Etat,this.Prix,this.Quantite,this.Vintage,this.Poid, this.Description]).then(() => console.log('insert into produits table successfully')).catch(e => console.log(e));
+    this.myAppDatabase.executeSql('INSERT INTO objets VALUES (?, ?, ?,?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?);', [this.NomObjet, this.Categorie, this.Couleur,this.Genre,this.Marque,this.Matiere,this.Etat,this.Prix,this.Quantite,this.Vintage,this.Poid, this.Description, this.avatar1, this.avatar2, this.avatar3, this.avatar4, this.avatar5, this.avatar6]).then(() => console.log('insert into produits table successfully')).catch(e => console.log(e));
     alert("Ajoute succes");
     this.navCtrl.push(ChoixPage);
   }
   search(){
-    this.myAppDatabase.executeSql('SELECT * FROM produits;',{}).then(res => {
+    this.myAppDatabase.executeSql('SELECT * FROM objets;',{}).then(res => {
       alert("jin le");  
       if(res.rows.length > 0) {
           alert("yesss");

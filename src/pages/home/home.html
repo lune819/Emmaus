@@ -1,18 +1,14 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
+<ion-header class="color">
+  <ion-navbar class="color">
+    <ion-title class="color">
+      Welcome to Lab Emmaus
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
-
-<button ion-button (click)="initDatabase()">initialiser</button>
+ 
+<button ion-button color="light" round full (click)="initDatabase()">Reset!!</button>
 
 <div class="list">
   <label class="item item-input">
@@ -26,9 +22,6 @@
 </div>
 
 
-<button ion-button (click)="goChoix(login,mdp)">Submit</button>
+<button ion-button color="light" full (click)="goChoix(login,mdp)">Submit</button>
 
-<p>results:
-  {{result}}
-</p>
 </ion-content>

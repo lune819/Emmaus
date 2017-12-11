@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import{VetementvalidationPage} from '../vetementvalidation/vetementvalidation';
 
+
+
 /**
  * Generated class for the VetementinfoPage page.
  *
@@ -19,9 +21,28 @@ export class VetementinfoPage {
   public NomObjet;
   public number=1;
   public Categorie;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public avatar1;
+  public avatar2;
+  public avatar3;
+  public avatar4;
+  public avatar5;
+  public avatar6;
+
+
+
+  constructor(
+     public navCtrl: NavController,
+     public navParams: NavParams
+  
+  ) {
     this.NomObjet = this.navParams.get('Nom');
     this.Categorie = this.navParams.get('Categorie');
+    this.avatar1 = this.navParams.get('Image1');
+    this.avatar2 = this.navParams.get('Image2');
+    this.avatar3 = this.navParams.get('Image3');
+    this.avatar4 = this.navParams.get('Image4');
+    this.avatar5 = this.navParams.get('Image5');
+    this.avatar6 = this.navParams.get('Image6');
   }
   
   public fois=1;
@@ -50,8 +71,16 @@ export class VetementinfoPage {
       Prix: vetement_prix,
       NomObjet: this.NomObjet,
       Categorie: this.Categorie,
-      Nombre: this.number
-});
+      Nombre: this.number,
+      Image1: this.avatar1,
+      Image2: this.avatar2,
+      Image3: this.avatar3,
+      Image4: this.avatar4,
+      Image5: this.avatar5,
+      Image6: this.avatar6
+    });
   }
+
+  
 
 }

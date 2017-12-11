@@ -6,8 +6,8 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>searchresult</ion-title>
+  <ion-navbar class="color">
+    <ion-title class="color">searchresult</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -41,5 +41,17 @@
   <br/>
   Description: {{Description}}
   <br/>
+  <div class="div">
+      <div class="div1" tappable [ngStyle]="{'background-image': 'url('+avatar1+')'}"></div> 
+      <div class="div2" tappable [ngStyle]="{'background-image': 'url('+avatar2+')'}"></div> 
+    </div>
+    <div class="div">
+      <div class="div1" tappable [ngStyle]="{'background-image': 'url('+avatar3+')'}"></div> 
+      <div class="div2" tappable [ngStyle]="{'background-image': 'url('+avatar4+')'}"></div> 
+    </div>
+    <div class="div">
+      <div class="div1" tappable [ngStyle]="{'background-image': 'url('+avatar5+')'}"></div> 
+      <div class="div2" tappable [ngStyle]="{'background-image': 'url('+avatar6+')'}"></div> 
+    </div>
   <br/>
 </ion-content>

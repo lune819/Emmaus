@@ -6,8 +6,8 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>infogeneral</ion-title>
+  <ion-navbar class="color">
+    <ion-title class="color">infogeneral</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -58,17 +58,30 @@
         </div>
       </div>
 
+    <br/>
 
-      
+      <button ion-button color="light" (click)="presentActionSheet()">Photo+<ion-icon md="md-add-circle"></ion-icon></button>
+      <button ion-button color="light" (click)="deletePhoto()">Remove<ion-icon name='close'></ion-icon></button>
+     
 
-      
-      <br/><br/><br/>
-    
-      
 
-      <button ion-button (click)="change(categorie,Nom)">suivant</button>
       <br/>
+      <div class="div">
+        <div class="div1" tappable [ngStyle]="{'background-image': 'url('+avatar1+')'}"></div> 
+        <div class="div2" tappable [ngStyle]="{'background-image': 'url('+avatar2+')'}"></div> 
+      </div>
+      <div class="div">
+        <div class="div1" tappable [ngStyle]="{'background-image': 'url('+avatar3+')'}"></div> 
+        <div class="div2" tappable [ngStyle]="{'background-image': 'url('+avatar4+')'}"></div> 
+      </div>
+      <div class="div">
+        <div class="div1" tappable [ngStyle]="{'background-image': 'url('+avatar5+')'}"></div> 
+        <div class="div2" tappable [ngStyle]="{'background-image': 'url('+avatar6+')'}"></div> 
+      </div>
+      <button ion-button color="light" icon-end full (click)="change(categorie,Nom)">
+          Suivant<ion-icon name='arrow-forward'></ion-icon>
+      </button>
       <br/>
-      <button ion-button style="height:20px">Prendre une photo</button>
-      <button ion-button style="height:20px">Importer une photo</button>
+ 
+ 
 </ion-content>

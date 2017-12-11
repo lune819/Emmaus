@@ -14,6 +14,10 @@ import {VetementinfoPage} from '../pages/vetementinfo/vetementinfo';
 import {VetementvalidationPage} from '../pages/vetementvalidation/vetementvalidation';
 import {SearchresultPage} from '../pages/searchresult/searchresult';
 
+import {Camera} from "@ionic-native/camera";
+import {ImagePicker} from "@ionic-native/image-picker";
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -42,6 +46,9 @@ import {SearchresultPage} from '../pages/searchresult/searchresult';
     StatusBar,
     SplashScreen,
     SQLite,
+    Camera,
+    ImagePicker,
+    BarcodeScanner,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Toast
   ]
