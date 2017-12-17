@@ -9,6 +9,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import {ImagePicker, ImagePickerOptions} from "@ionic-native/image-picker";
 import {Camera, CameraOptions} from "@ionic-native/camera";
 
+import { Http } from '@angular/http';
+
 /**
  * Generated class for the ChoixPage page.
  *
@@ -42,7 +44,8 @@ export class ChoixPage {
   public avatar4;
   public avatar5;
   public avatar6;
-  private toast: Toast
+  private toast: Toast;
+  data:any = {};
   
     myAppDatabase: SQLiteObject;
   constructor(
@@ -73,6 +76,20 @@ export class ChoixPage {
   goinfo(){
     this.navCtrl.push(InfogeneralPage);
   }
+
+  search_par_nom(produit_nom){  
+    //alert("jin le");  
+      if(produit_nom != null) {
+          this.navCtrl.push(SearchresultPage,{
+            NomObjet: produit_nom
+      });
+}
+      else{
+        alert("nom vide!");
+      }
+  }
+  
+
   search(produit_nom){
     //modifier par jyq
     //this.myAppDatabase.executeSql('SELECT * FROM objets where nom LIKE \'%?%\';',[produit_nom]).then(res => {
@@ -122,7 +139,6 @@ export class ChoixPage {
             Image6: this.avatar6
       });
 }
-
 }).catch(e => {
 console.log(e);
 this.toast.show(e, '5000', 'center').subscribe(

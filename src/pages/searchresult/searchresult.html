@@ -14,44 +14,13 @@
 
 
 <ion-content padding>
-  <h3>RESULTAT DE RECHERCHE</h3>
-  <h4>PRODUIT</h4>
-  Nom d'objet: {{NomObjet}}
-  <br/>
-  Categorie: {{Categorie}}
-  <br/>
-  <h4>CARACTERISTIC</h4>
-  Couleur: {{Couleur}}
-  <br/>
-  Genre: {{Genre}}
-  <br/>
-  Marque: {{Marque}}
-  <br/>
-  Matiere: {{Matiere}}
-  <br/>
-  Etat: {{Etat}}
-  <br/>
-  Prix: {{Prix}}
-  <br/>
-  Poid: {{Poid}}
-  <br/>
-  Quantite: {{Quantite}}
-  <br/>
-  Vintage: {{Vintage}}
-  <br/>
-  Description: {{Description}}
-  <br/>
-  <div class="div">
-      <div class="div1" tappable [ngStyle]="{'background-image': 'url('+avatar1+')'}"></div> 
-      <div class="div2" tappable [ngStyle]="{'background-image': 'url('+avatar2+')'}"></div> 
-    </div>
-    <div class="div">
-      <div class="div1" tappable [ngStyle]="{'background-image': 'url('+avatar3+')'}"></div> 
-      <div class="div2" tappable [ngStyle]="{'background-image': 'url('+avatar4+')'}"></div> 
-    </div>
-    <div class="div">
-      <div class="div1" tappable [ngStyle]="{'background-image': 'url('+avatar5+')'}"></div> 
-      <div class="div2" tappable [ngStyle]="{'background-image': 'url('+avatar6+')'}"></div> 
-    </div>
-  <br/>
+    <h2>titre</h2>
+    <p>价格:123元</p> 
+  <ion-list>
+    <ion-item *ngFor="let post of posts">
+        <h2>titre</h2>
+        <p>价格:123元</p>  
+    </ion-item>
+  </ion-list>
+
 </ion-content>

@@ -18,6 +18,10 @@ import {Camera} from "@ionic-native/camera";
 import {ImagePicker} from "@ionic-native/image-picker";
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
+import { HttpModule} from '@angular/http';
+
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -30,6 +34,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

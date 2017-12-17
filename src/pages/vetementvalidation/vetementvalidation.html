@@ -53,8 +53,10 @@
       <div class="div2" tappable [ngStyle]="{'background-image': 'url('+avatar6+')'}"></div> 
     </div>
   <br/>
-  <button ion-button color="light" full (click)="valider()">Enregistrer</button>
+  <button ion-button color="light" full (click)="submit()">Enregistrer</button>
   <button ion-button color="light" outline full (click)="search()">Search</button>
   <br/>
   <br/>
+
+  {{data.response}}
 </ion-content>

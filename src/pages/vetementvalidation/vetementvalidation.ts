@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {SQLite, SQLiteObject} from "@ionic-native/sqlite";
 import { Toast } from '@ionic-native/toast';
 import {ChoixPage} from '../choix/choix';
-
+import { Http } from '@angular/http';
 /**
  * Generated class for the VetementvalidationPage page.
  *
@@ -37,10 +37,11 @@ export class VetementvalidationPage {
   public avatar4;
   public avatar5;
   public avatar6;
+  data:any = {};
   private toast: Toast
   
     myAppDatabase: SQLiteObject;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private sqlite: SQLite) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private sqlite: SQLite, public http: Http) {
     this.Genre = this.navParams.get('Genre');
     this.Categorie = this.navParams.get('Categorie');
     this.NomObjet = this.navParams.get('NomObjet');
@@ -60,6 +61,20 @@ export class VetementvalidationPage {
     this.avatar4 = this.navParams.get('Image4');
     this.avatar5 = this.navParams.get('Image5');
     this.avatar6 = this.navParams.get('Image6');
+    this.data.response = '';
+    this.http = http;
+    this.data.Genre=this.Genre;
+    this.data.Categorie=this.Categorie;
+    this.data.NomObjet=this.NomObjet;
+    this.data.Couleur=this.Couleur;
+    this.data.Marque=this.Marque;
+    this.data.Matiere=this.Matiere;
+    this.data.Etat=this.Etat;
+    this.data.Prix=this.Prix;
+    this.data.Quantite=this.Quantite;
+    this.data.Vintage=this.Vintage;
+    this.data.Description=this.Description;
+    this.data.Poid=this.Poid;
 
     this.sqlite.create({
       name: 'EmmausTest.db',
@@ -76,11 +91,46 @@ export class VetementvalidationPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ValidationVetementPage');
   }
+  //ne plus utiliser
   valider(){
     this.myAppDatabase.executeSql('INSERT INTO objets VALUES (?, ?, ?,?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?);', [this.NomObjet, this.Categorie, this.Couleur,this.Genre,this.Marque,this.Matiere,this.Etat,this.Prix,this.Quantite,this.Vintage,this.Poid, this.Description, this.avatar1, this.avatar2, this.avatar3, this.avatar4, this.avatar5, this.avatar6]).then(() => console.log('insert into produits table successfully')).catch(e => console.log(e));
     alert("Ajoute succes");
     this.navCtrl.push(ChoixPage);
   }
+
+  submit() {
+    this.data.username = 'xxyzzy';
+    var link = 'http://tuxa.sme.utc/~na17a023/testphp.php';
+    var myData = JSON.stringify({
+      username: this.data.username,
+      NomObjet: this.data.NomObjet,
+      Categorie:this.data.Categorie,
+      Couleur:this.data.Couleur,
+      Genre:this.data.Genre,
+      Marque:this.data.Marque,
+      Matiere:this.data.Matiere,
+      Etat:this.data.Etat,
+      Prix:this.data.Prix,
+      Quantite:this.data.Quantite,
+      Vintage:this.data.Vintage,
+      Poid:this.data.Poid,
+      Description:this.data.Description
+    
+    });
+    
+    this.http.post(link, myData)
+    .subscribe(data => {
+      alert("entre");
+      this.data.response = data["_body"];
+      alert(this.data.response);
+    }, error => {
+        console.log("Oooops!");
+    });
+    this.navCtrl.push(ChoixPage);
+}
+
+
+/*
   search(){
     this.myAppDatabase.executeSql('SELECT * FROM objets;',{}).then(res => {
       alert("jin le");  
@@ -88,7 +138,7 @@ export class VetementvalidationPage {
           alert("yesss");
           this.result = res.rows.item(3).nom;
           alert(this.result);
-}
+      }
 
 }).catch(e => {
 console.log(e);
@@ -99,5 +149,6 @@ this.toast.show(e, '5000', 'center').subscribe(
 );
 });
   }
+*/
 
 }

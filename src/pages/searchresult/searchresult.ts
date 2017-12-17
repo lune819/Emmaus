@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 /**
  * Generated class for the SearchresultPage page.
  *
@@ -33,29 +35,44 @@ export class SearchresultPage {
   public avatar5;
   public avatar6;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.Genre = this.navParams.get('Genre');
-    this.Categorie = this.navParams.get('Categorie');
-    this.NomObjet = this.navParams.get('NomObjet');
-    this.Couleur = this.navParams.get('Couleur');
-    this.Marque = this.navParams.get('Marque');
-    this.Matiere = this.navParams.get('Matiere');
-    this.Etat = this.navParams.get('Etat');
-    this.Prix = this.navParams.get('Prix');
-    this.Quantite = this.navParams.get('Nombre');
-    this.Vintage = this.navParams.get('Vintage');
-    this.Description = this.navParams.get('Description');
-    this.Poid = this.navParams.get('Poid');
-    this.avatar1 = this.navParams.get('Image1');
-    this.avatar2 = this.navParams.get('Image2');
-    this.avatar3 = this.navParams.get('Image3');
-    this.avatar4 = this.navParams.get('Image4');
-    this.avatar5 = this.navParams.get('Image5');
-    this.avatar6 = this.navParams.get('Image6');
-  }
+  data:any = {};
+  posts: any;
 
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
+    this.http = http;
+    
+    this.NomObjet = this.navParams.get('NomObjet');
+    var link = 'http://tuxa.sme.utc/~na17a023/searchbynom.php';
+    var myData = JSON.stringify({ NomObjet: this.NomObjet });
+    /*
+    this.http.post(link, myData)
+    .map(res => res.json())
+    .subscribe(data => {
+      //this.data.response = data["_body"];
+      this.posts = data.data;
+    }, error => {
+        console.log("Oooops!");
+    });*/
+    this.http.get('http://tuxa.sme.utc/~na17a023/testid.php').map(res => res.json()).subscribe(data => {
+      this.posts = data.data;
+    });
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchresultPage');
   }
+
+  search_par_nom(){
+    var link = 'http://tuxa.sme.utc/~na17a023/searchbynom.php';
+    var myData = JSON.stringify({ NomObjet: this.NomObjet });
+    this.http.post(link, myData)
+    .subscribe(data => {
+      this.data.response = data["_body"];
+    }, error => {
+        console.log("Oooops!");
+    });
+  }
+
+
+
 
 }
