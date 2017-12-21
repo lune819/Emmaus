@@ -14,13 +14,58 @@
 
 
 <ion-content padding>
-    <h2>titre</h2>
-    <p>价格:123元</p> 
-  <ion-list>
-    <ion-item *ngFor="let post of posts">
-        <h2>titre</h2>
-        <p>价格:123元</p>  
-    </ion-item>
-  </ion-list>
+    <button ion-button color="light" (click)="valider()">Valider</button>
+    <button ion-button color="light" (click)="archiver()">Archiver</button>
+    <button ion-button color="light" (click)="change()">Modifier</button>
+    
+  <h4>PRODUIT</h4>
+  ID: {{Id}}  
+  <br/>
+  Statut: {{Statut}}
+  <br/>
+  Nom d'objet: {{NomObjet}}
+  <br/>
+  Categorie: {{Categorie}}
+  <br/>
+  Fournisseur: {{Fournisseur}}
+  <br/>
+  <h4>CARACTERISTIC</h4>
+  Couleur: {{Couleur}}
+  <br/>
+  Genre: {{Genre}}
+  <br/>
+  Marque: {{Marque}}
+  <br/>
+  Matiere: {{Matiere}}
+  <br/>
+  Etat: {{Etat}}
+  <br/>
+  Prix: {{Prix}}
+  <br/>
+  Poid: {{Poid}}
+  <br/>
+  Quantite: {{Quantite}}
+  <br/>
+  Vintage: {{Vintage}}
+  <br/>
+  Description: {{Description}}
+  <br/>
+  <div class="div">
+      <ion-img width="150" src={{avatar1}}></ion-img>
+      <ion-img width="150" src={{avatar2}}></ion-img>
+    </div>
+    <div class="div">
+        <ion-img width="150" src={{avatar3}}></ion-img>
+        <ion-img width="150" src={{avatar4}}></ion-img>
+    </div>
+    <div class="div">
+        <ion-img width="150" src={{avatar5}}></ion-img>
+        <ion-img width="150" src={{avatar6}}></ion-img>
+    </div>
+  <br/>
+
+
+  <br/>
+  <br/>
 
 </ion-content>

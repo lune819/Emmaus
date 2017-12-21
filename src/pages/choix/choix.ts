@@ -27,6 +27,7 @@ export class ChoixPage {
   public Genre;
   public Categorie;
   public NomObjet;
+  public Fournisseur;
   public Couleur;
   public Marque;
   public Matiere;
@@ -60,10 +61,7 @@ export class ChoixPage {
       name: 'EmmausTest.db',
       location: 'default'
     }).then((database: SQLiteObject) => {
-      //database.executeSql('CREATE TABLE IF NOT EXISTS users(email VARCHAR(320) PRIMARY KEY, username VARCHAR(20) NOT NULL, password VARCHAR(30) NOT NULL, gender BOOLEAN, age TINYINT, intro VARCHAR(300), phone CHAR(11), location VARCHAR(100));', {}).then(() => console.log('init database successfully')).catch(e => console.log(e));
-      //database.executeSql('CREATE TABLE IF NOT EXISTS produits(nom VARCHAR(320) PRIMARY KEY, categorie VARCHAR(20) NOT NULL, couleur VARCHAR(30) NOT NULL, genre varchar(30) NOT NULL, marque varchar(30) NOT NULL, matiere VARCHAR(300) NOT NULL, etat VARCHAR(30) NOT NULL, prix VARCHAR(30) NOT NULL, quantite INTEGER, vintage BOOLEAN, description VARCHAR(1000));', {}).then(() => console.log('init database successfully')).catch(e => console.log(e));      
-      //database.executeSql('CREATE TABLE IF NOT EXISTS objets(nom VARCHAR(320) PRIMARY KEY, categorie VARCHAR(20) NOT NULL, couleur VARCHAR(30) NOT NULL, genre varchar(30) NOT NULL, marque varchar(30) NOT NULL, matiere VARCHAR(300) NOT NULL, etat VARCHAR(30) NOT NULL, prix VARCHAR(30) NOT NULL, quantite INTEGER, vintage BOOLEAN, poid varchar(30) NOT NULL, description VARCHAR(1000)photo1 VARCHAR(255), photo2 VARCHAR(255), photo3 VARCHAR(255),photo4 VARCHAR(255), photo5 VARCHAR(255), photo6 VARCHAR(255));', {}).then(() => console.log('init database successfully')).catch(e => console.log(e));      
-      
+     
       this.myAppDatabase = database;
       
     })
@@ -77,11 +75,10 @@ export class ChoixPage {
     this.navCtrl.push(InfogeneralPage);
   }
 
-  search_par_nom(produit_nom){  
-    //alert("jin le");  
+  search_par_nom(produit_nom){   
       if(produit_nom != null) {
           this.navCtrl.push(SearchresultPage,{
-            NomObjet: produit_nom
+            Nom: produit_nom
       });
 }
       else{

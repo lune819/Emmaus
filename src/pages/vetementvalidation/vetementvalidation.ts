@@ -18,9 +18,11 @@ import { Http } from '@angular/http';
 })
 export class VetementvalidationPage {
 
+  //valeurs qui vont être affichées sur l'interface
   public Genre;
   public Categorie;
   public NomObjet;
+  public Fournisseur;
   public Couleur;
   public Marque;
   public Matiere;
@@ -37,14 +39,17 @@ export class VetementvalidationPage {
   public avatar4;
   public avatar5;
   public avatar6;
-  data:any = {};
+  public response;
+  //data:any = {};
   private toast: Toast
   
     myAppDatabase: SQLiteObject;
   constructor(public navCtrl: NavController, public navParams: NavParams, private sqlite: SQLite, public http: Http) {
+    //récupérer les valeurs données par la page précédente
     this.Genre = this.navParams.get('Genre');
     this.Categorie = this.navParams.get('Categorie');
     this.NomObjet = this.navParams.get('NomObjet');
+    this.Fournisseur = this.navParams.get('Fournisseur');
     this.Couleur = this.navParams.get('Couleur');
     this.Marque = this.navParams.get('Marque');
     this.Matiere = this.navParams.get('Matiere');
@@ -54,38 +59,22 @@ export class VetementvalidationPage {
     this.Vintage = this.navParams.get('Vintage');
     this.Description = this.navParams.get('Description');
     this.Poid = this.navParams.get('Poid');
-
     this.avatar1 = this.navParams.get('Image1');
     this.avatar2 = this.navParams.get('Image2');
     this.avatar3 = this.navParams.get('Image3');
     this.avatar4 = this.navParams.get('Image4');
     this.avatar5 = this.navParams.get('Image5');
     this.avatar6 = this.navParams.get('Image6');
-    this.data.response = '';
-    this.http = http;
-    this.data.Genre=this.Genre;
-    this.data.Categorie=this.Categorie;
-    this.data.NomObjet=this.NomObjet;
-    this.data.Couleur=this.Couleur;
-    this.data.Marque=this.Marque;
-    this.data.Matiere=this.Matiere;
-    this.data.Etat=this.Etat;
-    this.data.Prix=this.Prix;
-    this.data.Quantite=this.Quantite;
-    this.data.Vintage=this.Vintage;
-    this.data.Description=this.Description;
-    this.data.Poid=this.Poid;
 
-    this.sqlite.create({
+    this.http = http;
+    this.response = '';
+
+    /*this.sqlite.create({
       name: 'EmmausTest.db',
       location: 'default'
     }).then((database: SQLiteObject) => {
-      //database.executeSql('CREATE TABLE IF NOT EXISTS users(email VARCHAR(320) PRIMARY KEY, username VARCHAR(20) NOT NULL, password VARCHAR(30) NOT NULL, gender BOOLEAN, age TINYINT, intro VARCHAR(300), phone CHAR(11), location VARCHAR(100));', {}).then(() => console.log('init database successfully')).catch(e => console.log(e));
-      //database.executeSql('CREATE TABLE IF NOT EXISTS objets(nom VARCHAR(320) PRIMARY KEY, categorie VARCHAR(20) NOT NULL, couleur VARCHAR(30) NOT NULL, genre varchar(30) NOT NULL, marque varchar(30) NOT NULL, matiere VARCHAR(300) NOT NULL, etat VARCHAR(30) NOT NULL, prix VARCHAR(30) NOT NULL, quantite INTEGER, vintage BOOLEAN, poid varchar(30) NOT NULL, description VARCHAR(1000)photo1 VARCHAR(255), photo2 VARCHAR(255), photo3 VARCHAR(255),photo4 VARCHAR(255), photo5 VARCHAR(255), photo6 VARCHAR(255));', {}).then(() => console.log('init database successfully')).catch(e => console.log(e));      
-      //database.executeSql('CREATE TABLE IF NOT EXISTS produits(nom VARCHAR(320) PRIMARY KEY, categorie VARCHAR(20) NOT NULL, couleur VARCHAR(30) NOT NULL, genre varchar(30) NOT NULL, marque varchar(30) NOT NULL, matiere VARCHAR(300) NOT NULL, etat VARCHAR(30) NOT NULL, prix VARCHAR(30) NOT NULL, quantite INTEGER, vintage BOOLEAN, description VARCHAR(1000),  );', {}).then(() => console.log('init database successfully')).catch(e => console.log(e));      
-      this.myAppDatabase = database;
-      
-    })
+      this.myAppDatabase = database;  
+    })*/
   }
 
   ionViewDidLoad() {
@@ -98,31 +87,38 @@ export class VetementvalidationPage {
     this.navCtrl.push(ChoixPage);
   }
 
+  //
   submit() {
-    this.data.username = 'xxyzzy';
-    var link = 'http://tuxa.sme.utc/~na17a023/testphp.php';
+    var link = 'http://tuxa.sme.utc/~na17a023/insertvetement.php';
     var myData = JSON.stringify({
-      username: this.data.username,
-      NomObjet: this.data.NomObjet,
-      Categorie:this.data.Categorie,
-      Couleur:this.data.Couleur,
-      Genre:this.data.Genre,
-      Marque:this.data.Marque,
-      Matiere:this.data.Matiere,
-      Etat:this.data.Etat,
-      Prix:this.data.Prix,
-      Quantite:this.data.Quantite,
-      Vintage:this.data.Vintage,
-      Poid:this.data.Poid,
-      Description:this.data.Description
-    
+      NomObjet: this.NomObjet,
+      Categorie:this.Categorie,
+      Fournisseur:this.Fournisseur,
+      Couleur:this.Couleur,
+      Genre:this.Genre,
+      Marque:this.Marque,
+      Matiere:this.Matiere,
+      Etat:this.Etat,
+      Prix:this.Prix,
+      Quantite:this.Quantite,
+      Vintage:this.Vintage,
+      Poid:this.Poid,
+      Description:this.Description,
+      Statut:'B',
+      Photo1:this.avatar1,
+      Photo2:this.avatar2,
+      Photo3:this.avatar3,
+      Photo4:this.avatar4,
+      Photo5:this.avatar5,
+      Photo6:this.avatar6,
+      
     });
     
     this.http.post(link, myData)
     .subscribe(data => {
-      alert("entre");
-      this.data.response = data["_body"];
-      alert(this.data.response);
+      //alert("entre");
+      this.response = data["_body"];
+      alert(this.response);
     }, error => {
         console.log("Oooops!");
     });

@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import {ChoixPage} from '../pages/choix/choix';
+import { ModifierPage } from '../pages/modifier/modifier';
 import {InfogeneralPage} from '../pages/infogeneral/infogeneral';
 
 import { MyApp } from './app.component';
@@ -30,7 +31,8 @@ import { HttpModule} from '@angular/http';
     InfogeneralPage,
     VetementinfoPage,
     SearchresultPage,
-    VetementvalidationPage
+    VetementvalidationPage,
+    ModifierPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import { HttpModule} from '@angular/http';
     InfogeneralPage,
     VetementinfoPage,
     SearchresultPage,
-    VetementvalidationPage
+    VetementvalidationPage,
+    ModifierPage
   ],
   providers: [
     StatusBar,

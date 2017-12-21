@@ -6,8 +6,13 @@ import {VetementinfoPage} from '../vetementinfo/vetementinfo';
 import {ImagePicker, ImagePickerOptions} from "@ionic-native/image-picker";
 import {Camera, CameraOptions} from "@ionic-native/camera";
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+
+import { ChoixPage } from '../choix/choix';
 /**
- * Generated class for the InfogeneralPage page.
+ * Generated class for the ModifierPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -15,19 +20,38 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 @IonicPage()
 @Component({
-  selector: 'page-infogeneral',
-  templateUrl: 'infogeneral.html',
+  selector: 'page-modifier',
+  templateUrl: 'modifier.html',
 })
-export class InfogeneralPage {
+export class ModifierPage {
 
-  avatar1: string = "";
-  avatar2: string = "";
-  avatar3: string = "";
-  avatar4: string = "";
-  avatar5: string = "";
-  avatar6: string = "";
+  public Id;
+  public Genre;
+  public Categorie;
+  public NomObjet;
+  public Fournisseur;
+  public Couleur;
+  public Marque;
+  public Matiere;
+  public Etat;
+  public Prix;
+  public Quantite;
+  public Vintage;
+  public Description;
+  public Poid;
+  public Statut;
+  public avatar1;
+  public avatar2;
+  public avatar3;
+  public avatar4;
+  public avatar5;
+  public avatar6;
+  public response;
+  public response_traite;
+  data:any = {};
+  
   public counter=1; 
-  //public scannedText: string;
+  public number;
 
   constructor(
     public navCtrl: NavController, 
@@ -35,32 +59,20 @@ export class InfogeneralPage {
     public actionSheetCtrl: ActionSheetController, 
     public alertCtrl: AlertController, 
     public imagePicker: ImagePicker, 
-    public camera: Camera) {
-  }
+    public camera: Camera,
+    public http: Http) 
+    {
+      this.http = http;
+      this.NomObjet = this.navParams.get('Nom');
+      this.response = '';
+      this.search_par_nom();
+      
+    }//end of constructor
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InfogeneralPage');
+    console.log('ionViewDidLoad ModifierPage');
   }
 
-  //Sauter sur une page définie
-  change(c,nom,fourni){
-    if(c=='Vetement-femme'||c=='Vetement-homme'){
-      this.navCtrl.push(VetementinfoPage,{
-        Nom: nom,
-        Categorie: c,
-        //Founisseur: fourni,
-        Founisseur: fourni,
-        Image1: this.avatar1,
-        Image2: this.avatar2,
-        Image3: this.avatar3,
-        Image4: this.avatar4,
-        Image5: this.avatar5,
-        Image6: this.avatar6
-  });
-    }
-  }
-
-  //photo
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       buttons: [{
@@ -169,5 +181,97 @@ export class InfogeneralPage {
       return value;
     });
   }
+
+  //vetementinfo
+ 
+  increase(){
+    this.number++;
+  }
+  decrease(){
+    if(this.number>1)
+    this.number--;
+    else
+    alert("Il faut que le nombre soit plus de 1!");
+  }
+
+  search_par_nom(){
+    var link = 'http://tuxa.sme.utc/~na17a023/searchjson.php';
+    var myData = JSON.stringify({ NomObjet: this.NomObjet});
+    this.http.post(link, myData)
+    .subscribe(data => {
+      this.response = data["_body"];
+      this.response_traite = JSON.parse(this.response);
+      this.Id = this.response_traite.id;
+      this.Genre = this.response_traite.genre;
+      this.Categorie = this.response_traite.categorie;
+      this.Fournisseur = this.response_traite.fournisseur;
+      this.Couleur = this.response_traite.couleur;
+      this.Marque = this.response_traite.couleur;
+      this.Matiere = this.response_traite.matiere;
+      this.Etat = this.response_traite.etat;
+      this.Prix = this.response_traite.prix;
+      this.number = this.response_traite.quantite;
+      this.Vintage = this.response_traite.vintage;
+      this.Description = this.response_traite.description;
+      this.Poid = this.response_traite.poid;
+      this.Statut = this.response_traite.statut;
+      this.avatar1 = this.response_traite.photo1;
+      this.avatar2 = this.response_traite.photo2;
+      this.avatar3 = this.response_traite.photo3;
+      this.avatar4 = this.response_traite.photo4;
+      this.avatar5 = this.response_traite.photo5;
+      this.avatar6 = this.response_traite.photo6;
+      if(this.avatar1 == ''){this.counter = 1;}
+      else {if(this.avatar2 == ''){this.counter = 2;}
+            else {if(this.avatar3 == ''){this.counter = 3;}
+                  else {if(this.avatar4 == ''){this.counter = 4;}
+                        else {if(this.avatar5 == ''){this.counter = 5;}
+                              else {if (this.avatar6 == ''){this.counter = 6;}
+                                    else this.counter = 7;
+    }}}}}
+    }, error => {
+        console.log("Oooops!");
+    });  
+  }
+
+  submit() {
+    var link = 'http://tuxa.sme.utc/~na17a023/update.php';
+    var myData = JSON.stringify({
+      Id: this.Id,
+      NomObjet: this.NomObjet,
+      Categorie:this.Categorie,
+      Fournisseur:this.Fournisseur,
+      Couleur:this.Couleur,
+      Genre:this.Genre,
+      Marque:this.Marque,
+      Matiere:this.Matiere,
+      Etat:this.Etat,
+      Prix:this.Prix,
+      Quantite:this.number,
+      Vintage:this.Vintage,
+      Poid:this.Poid,
+      Description:this.Description,
+      Statut:this.Statut,
+      Photo1:this.avatar1,
+      Photo2:this.avatar2,
+      Photo3:this.avatar3,
+      Photo4:this.avatar4,
+      Photo5:this.avatar5,
+      Photo6:this.avatar6,
+      
+    });
+    
+    this.http.post(link, myData)
+    .subscribe(data => {
+      //alert("entre");
+      this.response = data["_body"];
+      alert(this.response);
+    }, error => {
+        console.log("Oooops!");
+    });
+    this.navCtrl.push(ChoixPage,{
+      Nom: this.NomObjet
+});
+}
 
 }

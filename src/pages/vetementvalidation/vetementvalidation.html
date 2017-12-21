@@ -19,6 +19,8 @@
   <br/>
   Categorie: {{Categorie}}
   <br/>
+  Fournisseur: {{Fournisseur}}
+  <br/>
   <h4>CARACTERISTIC</h4>
   Couleur: {{Couleur}}
   <br/>
@@ -41,22 +43,20 @@
   Description: {{Description}}
   <br/>
   <div class="div">
-      <div class="div1" tappable [ngStyle]="{'background-image': 'url('+avatar1+')'}"></div> 
-      <div class="div2" tappable [ngStyle]="{'background-image': 'url('+avatar2+')'}"></div> 
+      <ion-img width="150" src={{avatar1}}></ion-img>
+      <ion-img width="150" src={{avatar2}}></ion-img>
+  </div>
+    <div class="div">
+        <ion-img width="150" src={{avatar3}}></ion-img>
+        <ion-img width="150" src={{avatar4}}></ion-img>
     </div>
     <div class="div">
-      <div class="div1" tappable [ngStyle]="{'background-image': 'url('+avatar3+')'}"></div> 
-      <div class="div2" tappable [ngStyle]="{'background-image': 'url('+avatar4+')'}"></div> 
-    </div>
-    <div class="div">
-      <div class="div1" tappable [ngStyle]="{'background-image': 'url('+avatar5+')'}"></div> 
-      <div class="div2" tappable [ngStyle]="{'background-image': 'url('+avatar6+')'}"></div> 
+        <ion-img width="150" src={{avatar5}}></ion-img>
+        <ion-img width="150" src={{avatar6}}></ion-img>
     </div>
   <br/>
   <button ion-button color="light" full (click)="submit()">Enregistrer</button>
-  <button ion-button color="light" outline full (click)="search()">Search</button>
   <br/>
   <br/>
 
-  {{data.response}}
 </ion-content>

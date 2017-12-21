@@ -18,7 +18,7 @@
     
       <div class="item item-input item-select">
         <div class="input-label">
-          Categorie d'objet *
+          Categorie d'objet
         </div>
         <select [(ngModel)]="categorie" style="width:150px" name="categorie" id="categorie" >
           <optgroup label="Movilier-Deco" >
@@ -37,16 +37,26 @@
         </select>
       </div>
     
-      <div class="item item-input item-select">
-        <div class="input-label">
-          Fournisseur*
-        </div>
-        <select style="width:150px">
-          <option selected="">Fournisseur</option>
-        </select>
-      </div>
+     
       <br/>
 
+  </div>
+
+  <div class="list">
+      
+        <div class="item item-input item-select">
+          <div class="input-label">
+            Categorie de Fournisseur
+          </div>
+          <select [(ngModel)]="fourni" style="width:150px" name="fourni" id="fourni" >
+              <option value='Fournisseur1'>Fournisseur1</option>
+              <option value='Fournisseur2'>Fournisseur2</option>
+          </select>
+        </div>
+      
+       
+        <br/>
+  
     </div>
     
     <div class="content has-header">
@@ -56,7 +66,7 @@
             <input type="text" placeholder="" [(ngModel)]="Nom">
           </label>
         </div>
-      </div>
+    </div>
 
     <br/>
 
@@ -67,18 +77,18 @@
 
       <br/>
       <div class="div">
-        <div class="div1" tappable [ngStyle]="{'background-image': 'url('+avatar1+')'}"></div> 
-        <div class="div2" tappable [ngStyle]="{'background-image': 'url('+avatar2+')'}"></div> 
+          <ion-img width="150" src={{avatar1}}></ion-img>
+          <ion-img width="150" src={{avatar2}}></ion-img>
       </div>
       <div class="div">
-        <div class="div1" tappable [ngStyle]="{'background-image': 'url('+avatar3+')'}"></div> 
-        <div class="div2" tappable [ngStyle]="{'background-image': 'url('+avatar4+')'}"></div> 
+          <ion-img width="150" src={{avatar3}}></ion-img>
+          <ion-img width="150" src={{avatar4}}></ion-img>
       </div>
       <div class="div">
-        <div class="div1" tappable [ngStyle]="{'background-image': 'url('+avatar5+')'}"></div> 
-        <div class="div2" tappable [ngStyle]="{'background-image': 'url('+avatar6+')'}"></div> 
+          <ion-img width="150" src={{avatar5}}></ion-img>
+          <ion-img width="150" src={{avatar6}}></ion-img>
       </div>
-      <button ion-button color="light" icon-end full (click)="change(categorie,Nom)">
+      <button ion-button color="light" icon-end full (click)="change(categorie,Nom,fourni)">
           Suivant<ion-icon name='arrow-forward'></ion-icon>
       </button>
       <br/>

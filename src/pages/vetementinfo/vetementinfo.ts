@@ -17,18 +17,18 @@ import{VetementvalidationPage} from '../vetementvalidation/vetementvalidation';
   templateUrl: 'vetementinfo.html',
 })
 export class VetementinfoPage {
-
+  
+  //variables viennent de la page précédente
   public NomObjet;
-  public number=1;
   public Categorie;
+  public Fournisseur;
+  public number;
   public avatar1;
   public avatar2;
   public avatar3;
   public avatar4;
   public avatar5;
   public avatar6;
-
-
 
   constructor(
      public navCtrl: NavController,
@@ -37,15 +37,17 @@ export class VetementinfoPage {
   ) {
     this.NomObjet = this.navParams.get('Nom');
     this.Categorie = this.navParams.get('Categorie');
+    this.Fournisseur = this.navParams.get('Founisseur');
     this.avatar1 = this.navParams.get('Image1');
     this.avatar2 = this.navParams.get('Image2');
     this.avatar3 = this.navParams.get('Image3');
     this.avatar4 = this.navParams.get('Image4');
     this.avatar5 = this.navParams.get('Image5');
     this.avatar6 = this.navParams.get('Image6');
+    this.number=1;
   }
   
-  public fois=1;
+  //public fois=1;
   ionViewDidLoad() {
     console.log('ionViewDidLoad VetementInfo_1Page');
   }
@@ -58,6 +60,8 @@ export class VetementinfoPage {
     else
     alert("Il faut que le nombre soit plus de 1!");
   }
+
+  //fonction qui permet de passer les valeurs à la page suivante
   suivant(vetement_genre,Matiere_Vetement,Marque_Vetement,Couleur_Vetement,Poid_Vetement,vetement_Description,vetement_Etat,vetement_vintage,vetement_prix){
     this.navCtrl.push(VetementvalidationPage,{
       Genre: vetement_genre,
@@ -71,6 +75,7 @@ export class VetementinfoPage {
       Prix: vetement_prix,
       NomObjet: this.NomObjet,
       Categorie: this.Categorie,
+      Fournisseur: this.Fournisseur,
       Nombre: this.number,
       Image1: this.avatar1,
       Image2: this.avatar2,
