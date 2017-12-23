@@ -17,9 +17,11 @@
   <button ion-button color="light"  full (click)="goinfo()">Entrer un nouveau objet</button>
   <br/>
   <br/>
-  <label class="item item-input">
+  <label class="item item-input" full>
     <input type="text" placeholder="Nom" [(ngModel)]="nom_cherche">
   </label>
   <button ion-button color="light" full (click)="search_par_nom(nom_cherche)">Chercher les produits</button>
+  <br/>
+  <br/>
   <button ion-button color="light" full (click)="scanQR()">Code barre Scanner</button>
 </ion-content>

@@ -18,7 +18,7 @@ import { Http } from '@angular/http';
 })
 export class VetementvalidationPage {
 
-  //valeurs qui vont être affichées sur l'interface
+  //valeurs qui vont être affichées et tranféré au serveur
   public Genre;
   public Categorie;
   public NomObjet;
@@ -40,10 +40,11 @@ export class VetementvalidationPage {
   public avatar5;
   public avatar6;
   public response;
-  //data:any = {};
+  /*NE PLUS UTILISER
+  POUR LA BASE DE DONNEES LOCAL
   private toast: Toast
-  
-    myAppDatabase: SQLiteObject;
+  myAppDatabase: SQLiteObject;*/
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private sqlite: SQLite, public http: Http) {
     //récupérer les valeurs données par la page précédente
     this.Genre = this.navParams.get('Genre');
@@ -68,26 +69,13 @@ export class VetementvalidationPage {
 
     this.http = http;
     this.response = '';
-
-    /*this.sqlite.create({
-      name: 'EmmausTest.db',
-      location: 'default'
-    }).then((database: SQLiteObject) => {
-      this.myAppDatabase = database;  
-    })*/
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ValidationVetementPage');
   }
-  //ne plus utiliser
-  valider(){
-    this.myAppDatabase.executeSql('INSERT INTO objets VALUES (?, ?, ?,?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?);', [this.NomObjet, this.Categorie, this.Couleur,this.Genre,this.Marque,this.Matiere,this.Etat,this.Prix,this.Quantite,this.Vintage,this.Poid, this.Description, this.avatar1, this.avatar2, this.avatar3, this.avatar4, this.avatar5, this.avatar6]).then(() => console.log('insert into produits table successfully')).catch(e => console.log(e));
-    alert("Ajoute succes");
-    this.navCtrl.push(ChoixPage);
-  }
 
-  //
+  //Fonction pour inserer les informations d'un produit au serveur
   submit() {
     var link = 'http://tuxa.sme.utc/~na17a023/insertvetement.php';
     var myData = JSON.stringify({
@@ -110,41 +98,25 @@ export class VetementvalidationPage {
       Photo3:this.avatar3,
       Photo4:this.avatar4,
       Photo5:this.avatar5,
-      Photo6:this.avatar6,
-      
+      Photo6:this.avatar6,   
     });
-    
+    //Envoyer les informations du format JSON
     this.http.post(link, myData)
     .subscribe(data => {
-      //alert("entre");
       this.response = data["_body"];
       alert(this.response);
     }, error => {
-        console.log("Oooops!");
-    });
+        console.log("Oooops!");});
+    //Aller à la page "Choix"
     this.navCtrl.push(ChoixPage);
-}
-
-
-/*
-  search(){
-    this.myAppDatabase.executeSql('SELECT * FROM objets;',{}).then(res => {
-      alert("jin le");  
-      if(res.rows.length > 0) {
-          alert("yesss");
-          this.result = res.rows.item(3).nom;
-          alert(this.result);
-      }
-
-}).catch(e => {
-console.log(e);
-this.toast.show(e, '5000', 'center').subscribe(
-  toast => {
-    console.log(toast);
   }
-);
-});
-  }
-*/
+
+   /*NE PLUS UTILISER
+  POUR LA BASE DE DONNEES LOCAL
+  valider(){
+    this.myAppDatabase.executeSql('INSERT INTO objets VALUES (?, ?, ?,?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?);', [this.NomObjet, this.Categorie, this.Couleur,this.Genre,this.Marque,this.Matiere,this.Etat,this.Prix,this.Quantite,this.Vintage,this.Poid, this.Description, this.avatar1, this.avatar2, this.avatar3, this.avatar4, this.avatar5, this.avatar6]).then(() => console.log('insert into produits table successfully')).catch(e => console.log(e));
+    alert("Ajoute succes");
+    this.navCtrl.push(ChoixPage);
+  }*/
 
 }

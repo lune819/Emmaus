@@ -24,6 +24,8 @@ import { Http } from '@angular/http';
   templateUrl: 'choix.html',
 })
 export class ChoixPage {
+  /*POUR BASE DE DONNEES LOCAL
+  //NE PLUS UTILISER
   public Genre;
   public Categorie;
   public NomObjet;
@@ -38,7 +40,6 @@ export class ChoixPage {
   public Description;
   public Poid;
   public result;
-  public scannedText: string;
   public avatar1;
   public avatar2;
   public avatar3;
@@ -47,54 +48,69 @@ export class ChoixPage {
   public avatar6;
   private toast: Toast;
   data:any = {};
-  
-    myAppDatabase: SQLiteObject;
+  myAppDatabase: SQLiteObject;*/
+
+  public scannedText: string;
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
-    private sqlite: SQLite,
     public imagePicker: ImagePicker, 
     public camera: Camera,
-    private barcodeScanner: BarcodeScanner
+    private barcodeScanner: BarcodeScanner,
+    //private sqlite: SQLite,
   ) {
+    /*POUR BASE DE DONNEES LOCAL
+      NE PLUS UTILISER
     this.sqlite.create({
       name: 'EmmausTest.db',
       location: 'default'
-    }).then((database: SQLiteObject) => {
-     
-      this.myAppDatabase = database;
-      
-    })
+    }).then((database: SQLiteObject) => { this.myAppDatabase = database; })
+    */
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChoixPage');
   }
 
+  //ALLER à la page infogeneral pour entrer un nouveau objet
   goinfo(){
     this.navCtrl.push(InfogeneralPage);
   }
 
+  //Aller à la page searchresult 
+  //nom de produit est transféré comme un paramètre
   search_par_nom(produit_nom){   
-      if(produit_nom != null) {
+      if(produit_nom != null || produit_nom =="") {
           this.navCtrl.push(SearchresultPage,{
-            Nom: produit_nom
-      });
-}
+            Nom: produit_nom});
+      }
       else{
         alert("nom vide!");
       }
   }
   
+  //Fonction pour scanner un code barre ou QR code
+  scanQR() {
+       this.barcodeScanner.scan().then((barcodeData) => {
+         if (barcodeData.cancelled) {
+           console.log("User cancelled the action!");
+           return false;
+         }
+         console.log("Scanned successfully!");
+         console.log(barcodeData);
+         this.scannedText=JSON.stringify(barcodeData);
+         alert("Résultat : "+this.scannedText);
+       }, (err) => {
+         console.log(err);
+       });
+     }
 
+/*POUR BASE DE DONNEES LOCAL
+  NE PLUS UTILISER
   search(produit_nom){
-    //modifier par jyq
-    //this.myAppDatabase.executeSql('SELECT * FROM objets where nom LIKE \'%?%\';',[produit_nom]).then(res => {
-      this.myAppDatabase.executeSql('SELECT * FROM objets where nom=?;',[produit_nom]).then(res => {
-        
-    //alert("jin le");  
+    this.myAppDatabase.executeSql('SELECT * FROM objets where nom=?;',[produit_nom]).then(res => {
       if(res.rows.length > 0) {
-          //alert("yesss");
           this.NomObjet = res.rows.item(0).nom;
           this.Categorie=res.rows.item(0).categorie;
           this.Couleur=res.rows.item(0).couleur;
@@ -114,7 +130,6 @@ export class ChoixPage {
           this.avatar5=res.rows.item(0).photo5;
           this.avatar6=res.rows.item(0).photo6;
           alert("Produit find!");
-          //alert(this.Categorie);
           this.navCtrl.push(SearchresultPage,{
             Genre: this.Genre,
             Matiere: this.Matiere,
@@ -135,32 +150,10 @@ export class ChoixPage {
             Image5: this.avatar5,
             Image6: this.avatar6
       });
-}
-}).catch(e => {
-console.log(e);
-this.toast.show(e, '5000', 'center').subscribe(
-  toast => {
-    console.log(toast);
-  }
-);
-});
-  }
-
-  public scanQR() {
-    
-       this.barcodeScanner.scan().then((barcodeData) => {
-         if (barcodeData.cancelled) {
-           console.log("User cancelled the action!");
-           return false;
-         }
-         console.log("Scanned successfully!");
-         console.log(barcodeData);
-         //alert(barcodeData);
-         this.scannedText=JSON.stringify(barcodeData);
-         alert("Résultat : "+this.scannedText);
-       }, (err) => {
-         console.log(err);
-       });
-     } 
+      }
+    }).catch(e => { console.log(e);
+                    this.toast.show(e, '5000', 'center').subscribe(toast => {console.log(toast);});});
+  }*/
+ 
 
 }

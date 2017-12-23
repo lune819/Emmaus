@@ -7,20 +7,16 @@
 </ion-header>
 
 <ion-content padding>
- 
+  <div class="list">
+    <label class="item item-input">
+      <input type="text" placeholder="Identifiant" [(ngModel)]="login">
+    </label>
+    <br/>
+    <br/>
+    <label class="item item-input">
+      <input type="text" placeholder="Mot de passe" [(ngModel)]="mdp">
+    </label>
+  </div>
 
-<div class="list">
-  <label class="item item-input">
-    <input type="text" placeholder="Identifiant" [(ngModel)]="login">
-  </label>
-  <br/>
-  <br/>
-  <label class="item item-input">
-    <input type="text" placeholder="Mot de passe" [(ngModel)]="mdp">
-  </label>
-</div>
-
-
-<button ion-button color="light" full (click)="goChoix()">GO</button>
-<button ion-button color="light" full (click)="authen(login,mdp)">Submit</button>
+  <button ion-button color="light" full (click)="authen(login,mdp)">Submit</button>
 </ion-content>

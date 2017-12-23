@@ -1,6 +1,17 @@
 page-modifier {
-     .color{  
+    .div{   
+        overflow:auto;      
+    } 
+    .color{  
         background-color:rgb(204, 63, 110);             
     } 
-    
+    .header-image {
+        width: 100px;
+        height: 100px;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        background-size: cover;
+        background-color:rgb(255, 255, 255);          
+      }
 }

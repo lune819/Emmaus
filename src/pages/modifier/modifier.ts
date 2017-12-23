@@ -24,7 +24,7 @@ import { ChoixPage } from '../choix/choix';
   templateUrl: 'modifier.html',
 })
 export class ModifierPage {
-
+  //Valeurs pour stocker les informations retourné par le serveur
   public Id;
   public Genre;
   public Categorie;
@@ -50,7 +50,9 @@ export class ModifierPage {
   public response_traite;
   data:any = {};
   
+  //Pour compter le nombre de photo
   public counter=1; 
+  //Pour compter le nombre de produit
   public number;
 
   constructor(
@@ -63,16 +65,17 @@ export class ModifierPage {
     public http: Http) 
     {
       this.http = http;
+      //Obtenir le nom objet transféré par la page précédente
       this.NomObjet = this.navParams.get('Nom');
       this.response = '';
       this.search_par_nom();
-      
-    }//end of constructor
+    }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModifierPage');
   }
 
+  //Menu pour ajouter une photo
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       buttons: [{
@@ -95,11 +98,12 @@ export class ModifierPage {
         }
       }]
     });
-
     actionSheet.present().then(value => {
       return value;
     });
   }
+  
+  //Fonction pour prendre une photo
   takePhoto() {
     const options: CameraOptions = {
       quality: 100,
@@ -114,10 +118,7 @@ export class ModifierPage {
 
     this.camera.getPicture(options).then(image => {
       console.log('Image URI: ' + image);
-      //alert("pai zhao");
-      //this.avatar1 = image.slice(7);
-      //alert(image.slice(7));
-      //alert(this.counter);
+      //Stocker la photo selon la valeur de compteur
       if(this.counter == 1){this.avatar1 = 'data:image/jpeg;base64,' + image;}
       if(this.counter == 2){this.avatar2 = 'data:image/jpeg;base64,' + image;}
       if(this.counter == 3){this.avatar3 = 'data:image/jpeg;base64,' + image;}
@@ -126,12 +127,12 @@ export class ModifierPage {
       if(this.counter == 6){this.avatar6 = 'data:image/jpeg;base64,' + image;}
       if(this.counter >= 6){alert("6 photos maximals !");}
       this.counter++;
-      //this.avatar = image.slice(7);
     }, error => {
       console.log('Error: ' + error);
     });
   }
 
+  //Importer une photo sur album
   chooseFromAlbum() {
     const options: ImagePickerOptions = {
       maximumImagesCount: 1,
@@ -142,29 +143,26 @@ export class ModifierPage {
     this.imagePicker.getPictures(options).then(images => {
       if (images.length + this.counter > 7) {
         this.presentAlert();
-      } //else if (images.length === 1) {
+      }
         else{
         console.log('Image URI: ' + images[0]);
-        //let i = images.length;
         for(let i = 0; i < images.length ; i++ ){
-          //alert("counter "+this.counter);
-          //alert("i "+i);
+          //Stocker la photo selon la valeur de compteur
           if(i + this.counter == 1){this.avatar1 = 'data:image/jpeg;base64,' + images[i];}
           if(i + this.counter == 2){this.avatar2 = 'data:image/jpeg;base64,' + images[i];}
           if(i + this.counter == 3){this.avatar3 = 'data:image/jpeg;base64,' + images[i];}
           if(i + this.counter == 4){this.avatar4 = 'data:image/jpeg;base64,' + images[i];}
           if(i + this.counter == 5){this.avatar5 = 'data:image/jpeg;base64,' + images[i];}
           if(i + this.counter == 6){this.avatar6 = 'data:image/jpeg;base64,' + images[i];}
-          //this.avatar = images[0].slice(7);
         }
         this.counter = this.counter + images.length;
-        //this.avatar = images[0].slice(7);
       }
     }, error => {
       console.log('Error: ' + error);
     });
   }
 
+  //Supprimer tous les photos
   deletePhoto(){
     this.counter = 1;
     this.avatar1 = "";
@@ -175,6 +173,7 @@ export class ModifierPage {
     this.avatar6 = "";
   }
 
+  //Alert pour ne pas dépasser 6 photos maximal
   presentAlert() {
     let alert = this.alertCtrl.create({title: "failed", message: "6 photos maximal!", buttons: ["confirmer"]});
     alert.present().then(value => {
@@ -182,11 +181,11 @@ export class ModifierPage {
     });
   }
 
-  //vetementinfo
- 
+  //Fonction pour augmenter le nombre de produit
   increase(){
     this.number++;
   }
+  //Fonction pour dimunier le nombre de produit
   decrease(){
     if(this.number>1)
     this.number--;
@@ -194,13 +193,17 @@ export class ModifierPage {
     alert("Il faut que le nombre soit plus de 1!");
   }
 
+  //Fonction pour récupérer les informations d'un produit dans un serveur 
   search_par_nom(){
     var link = 'http://tuxa.sme.utc/~na17a023/searchjson.php';
     var myData = JSON.stringify({ NomObjet: this.NomObjet});
     this.http.post(link, myData)
     .subscribe(data => {
+      //Récupérer les informations
       this.response = data["_body"];
+      //Transférer ces informations au format JSON
       this.response_traite = JSON.parse(this.response);
+      //Saucegarder ces informations dans variables pour afficher
       this.Id = this.response_traite.id;
       this.Genre = this.response_traite.genre;
       this.Categorie = this.response_traite.categorie;
@@ -221,6 +224,7 @@ export class ModifierPage {
       this.avatar4 = this.response_traite.photo4;
       this.avatar5 = this.response_traite.photo5;
       this.avatar6 = this.response_traite.photo6;
+      //calculer le nombre de photo retourné par le serveur
       if(this.avatar1 == ''){this.counter = 1;}
       else {if(this.avatar2 == ''){this.counter = 2;}
             else {if(this.avatar3 == ''){this.counter = 3;}
@@ -234,6 +238,7 @@ export class ModifierPage {
     });  
   }
 
+  //Fonction pour mettre à jour les informations d'un produit
   submit() {
     var link = 'http://tuxa.sme.utc/~na17a023/update.php';
     var myData = JSON.stringify({
@@ -258,20 +263,18 @@ export class ModifierPage {
       Photo4:this.avatar4,
       Photo5:this.avatar5,
       Photo6:this.avatar6,
-      
     });
-    
+    //Envoyer les informations du format JSON
     this.http.post(link, myData)
     .subscribe(data => {
-      //alert("entre");
       this.response = data["_body"];
       alert(this.response);
     }, error => {
         console.log("Oooops!");
     });
+    //Aller à la page "Choix"
     this.navCtrl.push(ChoixPage,{
-      Nom: this.NomObjet
-});
-}
+      Nom: this.NomObjet});
+  }
 
 }

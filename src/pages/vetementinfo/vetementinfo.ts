@@ -18,11 +18,11 @@ import{VetementvalidationPage} from '../vetementvalidation/vetementvalidation';
 })
 export class VetementinfoPage {
   
-  //variables viennent de la page précédente
+  public number;
+  //variables pour la page précédente
   public NomObjet;
   public Categorie;
   public Fournisseur;
-  public number;
   public avatar1;
   public avatar2;
   public avatar3;
@@ -33,8 +33,8 @@ export class VetementinfoPage {
   constructor(
      public navCtrl: NavController,
      public navParams: NavParams
-  
   ) {
+    //Sauvegarder les informations qui viennent de la page précédente
     this.NomObjet = this.navParams.get('Nom');
     this.Categorie = this.navParams.get('Categorie');
     this.Fournisseur = this.navParams.get('Founisseur');
@@ -44,16 +44,19 @@ export class VetementinfoPage {
     this.avatar4 = this.navParams.get('Image4');
     this.avatar5 = this.navParams.get('Image5');
     this.avatar6 = this.navParams.get('Image6');
+    //Initialisation du nombre du produit
     this.number=1;
   }
   
-  //public fois=1;
   ionViewDidLoad() {
     console.log('ionViewDidLoad VetementInfo_1Page');
   }
+
+  //Fonction pour augmenter le nombre de produit
   increase(){
     this.number++;
   }
+  //Fonction pour dimunier le nombre de produit
   decrease(){
     if(this.number>1)
     this.number--;
@@ -85,7 +88,5 @@ export class VetementinfoPage {
       Image6: this.avatar6
     });
   }
-
-  
 
 }

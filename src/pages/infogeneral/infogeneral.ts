@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, ActionSheetController, AlertController} from 'ionic-angular';
-
 import {VetementinfoPage} from '../vetementinfo/vetementinfo';
-
 import {ImagePicker, ImagePickerOptions} from "@ionic-native/image-picker";
 import {Camera, CameraOptions} from "@ionic-native/camera";
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
@@ -20,14 +18,15 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 })
 export class InfogeneralPage {
 
+  //Variables pour stocker les 6 photos
   avatar1: string = "";
   avatar2: string = "";
   avatar3: string = "";
   avatar4: string = "";
   avatar5: string = "";
   avatar6: string = "";
+  //Variable pour compter le nombre de photo
   public counter=1; 
-  //public scannedText: string;
 
   constructor(
     public navCtrl: NavController, 
@@ -42,13 +41,12 @@ export class InfogeneralPage {
     console.log('ionViewDidLoad InfogeneralPage');
   }
 
-  //Sauter sur une page définie
+  //Pour aller à la page suivante
   change(c,nom,fourni){
     if(c=='Vetement-femme'||c=='Vetement-homme'){
       this.navCtrl.push(VetementinfoPage,{
         Nom: nom,
         Categorie: c,
-        //Founisseur: fourni,
         Founisseur: fourni,
         Image1: this.avatar1,
         Image2: this.avatar2,
@@ -60,7 +58,7 @@ export class InfogeneralPage {
     }
   }
 
-  //photo
+  //Menu pour ajouter une photo
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       buttons: [{
@@ -83,11 +81,12 @@ export class InfogeneralPage {
         }
       }]
     });
-
     actionSheet.present().then(value => {
       return value;
     });
   }
+
+  //Fonction pour prendre une photo
   takePhoto() {
     const options: CameraOptions = {
       quality: 100,
@@ -99,13 +98,9 @@ export class InfogeneralPage {
       destinationType: this.camera.DestinationType.DATA_URL,
       mediaType: this.camera.MediaType.PICTURE
     };
-
     this.camera.getPicture(options).then(image => {
       console.log('Image URI: ' + image);
-      //alert("pai zhao");
-      //this.avatar1 = image.slice(7);
-      //alert(image.slice(7));
-      //alert(this.counter);
+      //Stocker la photo selon la valeur de compteur
       if(this.counter == 1){this.avatar1 = 'data:image/jpeg;base64,' + image;}
       if(this.counter == 2){this.avatar2 = 'data:image/jpeg;base64,' + image;}
       if(this.counter == 3){this.avatar3 = 'data:image/jpeg;base64,' + image;}
@@ -114,12 +109,12 @@ export class InfogeneralPage {
       if(this.counter == 6){this.avatar6 = 'data:image/jpeg;base64,' + image;}
       if(this.counter >= 6){alert("6 photos maximals !");}
       this.counter++;
-      //this.avatar = image.slice(7);
     }, error => {
       console.log('Error: ' + error);
     });
   }
 
+  //Importer une photo sur album
   chooseFromAlbum() {
     const options: ImagePickerOptions = {
       maximumImagesCount: 1,
@@ -130,29 +125,26 @@ export class InfogeneralPage {
     this.imagePicker.getPictures(options).then(images => {
       if (images.length + this.counter > 7) {
         this.presentAlert();
-      } //else if (images.length === 1) {
+      }
         else{
         console.log('Image URI: ' + images[0]);
-        //let i = images.length;
         for(let i = 0; i < images.length ; i++ ){
-          //alert("counter "+this.counter);
-          //alert("i "+i);
+          //Stocker la photo selon la valeur de compteur
           if(i + this.counter == 1){this.avatar1 = 'data:image/jpeg;base64,' + images[i];}
           if(i + this.counter == 2){this.avatar2 = 'data:image/jpeg;base64,' + images[i];}
           if(i + this.counter == 3){this.avatar3 = 'data:image/jpeg;base64,' + images[i];}
           if(i + this.counter == 4){this.avatar4 = 'data:image/jpeg;base64,' + images[i];}
           if(i + this.counter == 5){this.avatar5 = 'data:image/jpeg;base64,' + images[i];}
           if(i + this.counter == 6){this.avatar6 = 'data:image/jpeg;base64,' + images[i];}
-          //this.avatar = images[0].slice(7);
         }
         this.counter = this.counter + images.length;
-        //this.avatar = images[0].slice(7);
       }
     }, error => {
       console.log('Error: ' + error);
     });
   }
 
+  //Supprimer tous les photos 
   deletePhoto(){
     this.counter = 1;
     this.avatar1 = "";
@@ -163,6 +155,7 @@ export class InfogeneralPage {
     this.avatar6 = "";
   }
 
+  //Alert pour ne pas dépasser 6 photos maximal
   presentAlert() {
     let alert = this.alertCtrl.create({title: "failed", message: "6 photos maximal!", buttons: ["confirmer"]});
     alert.present().then(value => {

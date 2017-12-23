@@ -10,7 +10,9 @@ import { Http } from '@angular/http';
   templateUrl: 'home.html'
 })
 export class HomePage {
-
+  
+  /*POUR BASE DE DONNEES LOCAL
+  //NE PLUS UTILISER
   username: string;
   password: string;
   gender: boolean;
@@ -23,13 +25,13 @@ export class HomePage {
   public test;
   public test1;
   private toast: Toast
-  public response;
-  myAppDatabase: SQLiteObject;
-
+  myAppDatabase: SQLiteObject;*/
   
-
+  public response;
 
   constructor(public navCtrl: NavController, private sqlite: SQLite, public http: Http) {
+    this.http = http;
+    this.response='';
     /*NE PLUS UTILISER
     POUR LA BASE DE DONNEES LOCAL
     this.username = "admin";
@@ -40,12 +42,14 @@ export class HomePage {
     this.email = "jyq@666.com";
     this.phone = "18302199093";
     this.location = "default";*/
-    this.http = http;
-    this.response='';
   }
+
+  /*POUR TESTER
   goChoix(){
     this.navCtrl.push(ChoixPage);
-  }
+  }*/
+
+  //Fonction de login
   authen(login,mdp){
     if(login==null||login=="")
         alert("Veuillez saisir votre identifiant!");
@@ -57,7 +61,6 @@ export class HomePage {
       this.http.post(link, myData)
       .subscribe(data => {
         this.response = data["_body"];
-        //alert(this.response);
         if(this.response==mdp)
           this.navCtrl.push(ChoixPage);
         else

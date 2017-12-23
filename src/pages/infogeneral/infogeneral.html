@@ -5,17 +5,14 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar class="color">
     <ion-title class="color">infogeneral</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
   <div class="list">
-    
       <div class="item item-input item-select">
         <div class="input-label">
           Categorie d'objet
@@ -36,12 +33,8 @@
           </optgroup>
         </select>
       </div>
-    
-     
       <br/>
-
   </div>
-
   <div class="list">
       
         <div class="item item-input item-select">
@@ -53,12 +46,8 @@
               <option value='Fournisseur2'>Fournisseur2</option>
           </select>
         </div>
-      
-       
         <br/>
-  
     </div>
-    
     <div class="content has-header">
         <p>Nom d'objet*</p>
         <div class="list">
@@ -67,31 +56,22 @@
           </label>
         </div>
     </div>
-
     <br/>
-
       <button ion-button color="light" (click)="presentActionSheet()">Photo+<ion-icon md="md-add-circle"></ion-icon></button>
       <button ion-button color="light" (click)="deletePhoto()">Remove<ion-icon name='close'></ion-icon></button>
-     
-
-
       <br/>
       <div class="div">
-          <ion-img width="150" src={{avatar1}}></ion-img>
-          <ion-img width="150" src={{avatar2}}></ion-img>
+          <ion-img class="header-image" src={{avatar1}}></ion-img>
+          <ion-img class="header-image" src={{avatar2}}></ion-img>
+          <ion-img class="header-image" src={{avatar3}}></ion-img>
       </div>
       <div class="div">
-          <ion-img width="150" src={{avatar3}}></ion-img>
-          <ion-img width="150" src={{avatar4}}></ion-img>
-      </div>
-      <div class="div">
-          <ion-img width="150" src={{avatar5}}></ion-img>
-          <ion-img width="150" src={{avatar6}}></ion-img>
+          <ion-img class="header-image" src={{avatar4}}></ion-img>
+          <ion-img class="header-image" src={{avatar5}}></ion-img>
+          <ion-img class="header-image" src={{avatar6}}></ion-img>
       </div>
       <button ion-button color="light" icon-end full (click)="change(categorie,Nom,fourni)">
           Suivant<ion-icon name='arrow-forward'></ion-icon>
       </button>
       <br/>
- 
- 
 </ion-content>

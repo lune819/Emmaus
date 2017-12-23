@@ -18,7 +18,6 @@
     <h4>Statut: {{Statut}}</h4>
     <h4>Categorie: {{Categorie}}</h4>
     <br/>
-    
     <div class="list">
            <div class="item item-input item-select">
               <div class="input-label">
@@ -44,20 +43,16 @@
     <button ion-button color="light" (click)="deletePhoto()">Remove<ion-icon name='close'></ion-icon></button>
     <br/>
     <div class="div">
-        <ion-img width="150" src={{avatar1}}></ion-img>
-        <ion-img width="150" src={{avatar2}}></ion-img>
+        <ion-img class="header-image" src={{avatar1}}></ion-img>
+        <ion-img class="header-image" src={{avatar2}}></ion-img>
+        <ion-img class="header-image" src={{avatar3}}></ion-img>
     </div>
     <div class="div">
-        <ion-img width="150" src={{avatar3}}></ion-img>
-        <ion-img width="150" src={{avatar4}}></ion-img>
-    </div>
-    <div class="div">
-        <ion-img width="150" src={{avatar5}}></ion-img>
-        <ion-img width="150" src={{avatar6}}></ion-img>
-    </div>
-    
+        <ion-img class="header-image" src={{avatar4}}></ion-img>
+        <ion-img class="header-image" src={{avatar5}}></ion-img>
+        <ion-img class="header-image" src={{avatar6}}></ion-img>
+    </div>  
     <br/>
-
     <div class="item item-input item-select">
         <div class="input-label">
           Genre de vetement
@@ -78,81 +73,74 @@
               <input type="text" placeholder="" [(ngModel)]="Matiere">
             </label>
           </div>
-        </div>
-        <div class="content has-header">
+      </div>
+      <div class="content has-header">
             <p>Marque</p>
             <div class="list">
               <label class="item item-input">
                 <input type="text" placeholder="" [(ngModel)]="Marque">
               </label>
             </div>
-          </div>
-          <div class="content has-header">
-              <p>Couleur</p>
-              <div class="list">
-                <label class="item item-input">
-                  <input type="text" placeholder="" [(ngModel)]="Couleur">
-                </label>
-              </div>
+      </div>
+      <div class="content has-header">
+           <p>Couleur</p>
+             <div class="list">
+              <label class="item item-input">
+                <input type="text" placeholder="" [(ngModel)]="Couleur">
+              </label>
             </div>
-            <div class="content has-header">
-                <p>Poid (Kg)</p>
-                <div class="list">
-                  <label class="item item-input">
-                    <input type="text" placeholder="" [(ngModel)]="Poid">
-                  </label>
-                </div>
-              </div>
-              <div class="content has-header">
-                  <p>Description</p>
-                  <div class="list">
-                    <label class="item item-input">
-                        <textarea rows="3" cols="20" placeholder="Description jusqu'a 2000 caractere" [(ngModel)]="Description"> </textarea>
-                    </label>
-                  </div>
-                </div>
-                <div class="item item-input item-select">
-                    <div class="input-label">
-                      Etat
-                    </div>
-                    <select [(ngModel)]="Etat" style="width:150px" name="vetement_etat" id="vetement_etat" >
-                      <optgroup label="Etat" >
-                        <option value="Bien">Bien</option>
-                        <option value="Moyen">Moyen</option>
-                        <option value="Mal">Mal</option>
-                      </optgroup>
-                    </select>
-                  </div> 
-    
-    
-                  <div class="list">
-                    
-                    <div class="item item-divider"> 
-                      VINTAGE
-                    </div>
-                    
-                    <label class="toggle toggle-assertive">
-                      <input type="checkbox" [(ngModel)]="Vintage">
-                      <div class="track">
-                        <div class="handle"></div>
-                      </div>
-                      
-                    </label>
-                    </div>
-                   
-                    <div class="content has-header">
-                      <p >Prix</p>
-                      <div class="list">
-                        <label class="item item-input">
-                          <input type="text" placeholder="" [(ngModel)]="Prix">
-                        </label>
-                      </div>
-                      
-                    </div>
-                    Nombre :
-                    <button ion-button color="light" (click)="decrease()">-</button>
-                    {{number}}
-                    <button ion-button color="light" (click)="increase()">+</button>
-                    <br/>
-          <button ion-button color="light" full (click)="submit()">Sauvegarder</button>
+      </div>
+      <div class="content has-header">
+        <p>Poid (Kg)</p>
+          <div class="list">
+            <label class="item item-input">
+              <input type="text" placeholder="" [(ngModel)]="Poid">
+            </label>
+          </div>
+      </div>
+      <div class="content has-header">
+        <p>Description</p>
+          <div class="list">
+            <label class="item item-input">
+              <textarea rows="3" cols="20" placeholder="Description jusqu'a 2000 caractere" [(ngModel)]="Description"> </textarea>
+            </label>
+          </div>
+      </div>
+      <div class="item item-input item-select">
+        <div class="input-label">
+          Etat
+        </div>
+        <select [(ngModel)]="Etat" style="width:150px" name="vetement_etat" id="vetement_etat" >
+        <optgroup label="Etat" >
+          <option value="Bien">Bien</option>
+          <option value="Moyen">Moyen</option>
+          <option value="Mal">Mal</option>
+        </optgroup>
+        </select>
+      </div> 
+      <div class="list">
+        <div class="item item-divider"> 
+          VINTAGE
+        </div>
+        <label class="toggle toggle-assertive">
+          <input type="checkbox" [(ngModel)]="Vintage">
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+        </label>
+      </div>
+      <div class="content has-header">
+        <p >Prix</p>
+        <div class="list">
+          <label class="item item-input">
+            <input type="text" placeholder="" [(ngModel)]="Prix">
+          </label>
+        </div>
+      </div>
+      Nombre :
+      <button ion-button color="light" (click)="decrease()">-</button>
+      {{number}}
+      <button ion-button color="light" (click)="increase()">+</button>
+      <br/>
+      <button ion-button color="light" full (click)="submit()">Sauvegarder</button>
 </ion-content>

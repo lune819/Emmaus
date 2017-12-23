@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-
 import { ModifierPage } from '../modifier/modifier';
 /**
  * Generated class for the SearchresultPage page.
@@ -18,6 +16,7 @@ import { ModifierPage } from '../modifier/modifier';
   templateUrl: 'searchresult.html',
 })
 export class SearchresultPage {
+  //Valeurs pour stocker les informations retourné par le serveur
   public Id;
   public Genre;
   public Categorie;
@@ -43,27 +42,29 @@ export class SearchresultPage {
   public response_traite;
   data:any = {};
 
-
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
-    
-    
     this.http = http;
+    //Obtenir le nom objet transféré par la page précédente
     this.NomObjet = this.navParams.get('Nom');
     this.response = '';
     this.search_par_nom();
-   
   }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchresultPage');
   }
 
+  //Fonction pour récupérer les informations d'un produit dans un serveur 
   search_par_nom(){
     var link = 'http://tuxa.sme.utc/~na17a023/searchjson.php';
     var myData = JSON.stringify({ NomObjet: this.NomObjet});
     this.http.post(link, myData)
     .subscribe(data => {
+      //Récupérer les informations
       this.response = data["_body"];
+      //Transférer ces informations au format JSON
       this.response_traite = JSON.parse(this.response);
+      //Saucegarder ces informations dans variables pour afficher
       this.Id = this.response_traite.id;
       this.Genre = this.response_traite.genre;
       this.Categorie = this.response_traite.categorie;
@@ -89,6 +90,7 @@ export class SearchresultPage {
     });  
   }
 
+  //Fonction pour valider un produit selon un nom donné
   valider(){
     var link = 'http://tuxa.sme.utc/~na17a023/valider.php';
     var myData = JSON.stringify({ id: this.Id});
@@ -97,12 +99,12 @@ export class SearchresultPage {
       this.response = data["_body"];
       alert(this.response);
       this.search_par_nom();
-      
     }, error => {
         console.log("Oooops!");
     });
   }
 
+  //Foncrion pour archiver un produit selon un nom donné
   archiver(){
     var link = 'http://tuxa.sme.utc/~na17a023/archiver.php';
     var myData = JSON.stringify({ id: this.Id});
@@ -111,19 +113,15 @@ export class SearchresultPage {
       this.response = data["_body"];
       alert(this.response);
       this.search_par_nom();
-      
     }, error => {
         console.log("Oooops!");
     });
   }
 
-  //Sauter sur une page définie
+  //Fonction pour aller à la page modifier
   change(){
     this.navCtrl.push(ModifierPage,{
-      Nom: this.NomObjet
-});
-  
-}
-
+      Nom: this.NomObjet});
+  }
 
 }
